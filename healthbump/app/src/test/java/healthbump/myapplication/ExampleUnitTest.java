@@ -1,4 +1,4 @@
-package com.example.ku62245.fitnessapp;
+package healthbump.myapplication;
 
 import org.junit.Test;
 

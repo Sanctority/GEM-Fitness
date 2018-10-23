@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FitnessApp</string>
+    <string name="registrationSuccess">Registration was successful</string>
+    <string name="registrationFailed">User could not be registered</string>
 </resources>
