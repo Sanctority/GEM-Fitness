@@ -1,4 +1,4 @@
-package healthbump.myapplication;
+package gem.healthbump;
 
 import org.junit.Test;
 

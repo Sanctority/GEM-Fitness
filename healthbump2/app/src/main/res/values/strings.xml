@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HealthBump</string>
+    <string name="sign_up_message">Please enter your details to create an account</string>
+    <string name="create_account_message">Don\'t have an account? create one</string>
+</resources>
