@@ -10,16 +10,19 @@ import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
 
-    EditText editTextusername = (EditText) findViewById(R.id.editTextUsername);
-    EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-    TextView textViewSingUp = (TextView) findViewById(R.id.textViewCreateAccount);
-    Button loginBtn = findViewById(R.id.loginBtn);
-
+    EditText editTextUsername, editTextPassword;
+    TextView textViewSingUp;
+    Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+
+        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        textViewSingUp = (TextView) findViewById(R.id.textViewCreateAccount);
+        loginBtn = findViewById(R.id.loginBtn);
 
         textViewSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,12 +32,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        /*loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
-        });
+        });*/
 
     }
 }

@@ -7,15 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextUsername, editTextEmail, editTextPass, editTextRePass;
+    ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
 
@@ -24,7 +28,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        progressBar = findViewById(R.id.progressBarSignUp);
         editTextEmail = findViewById(R.id.emailS);
+        progressBar.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -32,10 +38,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void createUserAccount(){
-        String email = editTextEmail.getText().toString().trim();
-        String username = editTextUsername.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String username = editTextUsername.getText().toString().trim();
         String passwordUser = editTextPass.getText().toString().trim();
         String rePass = editTextRePass.getText().toString().trim();
+
 
         if (email.isEmpty()){
             editTextEmail.setError("You forgot to enter your email address");
@@ -73,12 +80,29 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, passwordUser)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        task.isSuccessful(){
+                        if(task.isSuccessful()){
+                            User user = new User(username, email);
 
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(SignUp.this, getString(R.string.account_created), Toast.LENGTH_LONG).show();
+                                    }else{
+                                        //Display Error message
+                                    }
+                                }
+                            });
+                        }else {
+                            Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
