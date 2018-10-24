@@ -39,4 +39,12 @@
         android:textAlignment="center"
         android:text="Button" />
 
+    <TextView
+        android:id="@+id/editTextCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:text="@string/create_account_message"
+        android:textAlignment="center" />
+
 </LinearLayout>

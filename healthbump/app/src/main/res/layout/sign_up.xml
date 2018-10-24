@@ -17,39 +17,68 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/editTextUsername"
-        android:layout_width="match_parent"
+        android:id="@+id/usernameS"
         android:layout_height="60sp"
         android:layout_gravity="center"
-        android:textColor="@color/colorMainTextMenus"
+        android:layout_marginTop="30sp"
         android:ems="10"
         android:gravity="center"
         android:hint="Username"
         android:inputType="textPersonName"
-        android:layout_marginTop="70sp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorMainTextMenus"
+        tools:layout_marginTop="10dp"
+        tools:layout_width="300sp" />
 
     <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:textColor="@color/colorMainTextMenus"
+        android:id="@+id/emailS"
         android:layout_height="60sp"
-        android:layout_marginTop="30sp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="@color/colorMainTextMenus"
+        tools:layout_marginTop="10dp"
+        tools:layout_width="300sp" />
+
+    <EditText
+        android:id="@+id/passwordS"
+        android:layout_height="60sp"
+        android:layout_gravity="center"
         android:ems="10"
         android:gravity="center"
         android:hint="Password"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/colorMainTextMenus"
+        tools:layout_marginTop="10dp"
+        tools:layout_width="300sp" />
+
+    <EditText
+        android:id="@+id/repasswordS"
+        android:layout_height="60sp"
+        android:ems="10"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:hint="Re-Type Password"
         android:inputType="textPassword"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorMainTextMenus"
+        tools:layout_marginTop="10dp"
+        tools:layout_width="300sp" />
 
     <Button
         android:layout_gravity="center"
-        android:textColor="@color/colorMainTextMenus"
+        android:textColor="@color/colorTitlesInMenuText"
         android:background="@color/colorBackground"
-        android:id="@+id/button"
+        android:gravity="center"
+        android:id="@+id/signUpBtn"
         android:layout_width="80sp"
         android:layout_height="60sp"
-        android:layout_marginTop="60sp"
+        android:layout_marginTop="30sp"
         android:textAlignment="center"
-        android:text="Button" />
+        android:text="Sign up" />
 
 </LinearLayout>
