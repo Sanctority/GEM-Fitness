@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">#2B7A78</color>
+    <color name="colorMainTextMenus">#17252A</color>
+    <color name="colorTitlesInMenuText">#FEFFFF</color>
+</resources>
