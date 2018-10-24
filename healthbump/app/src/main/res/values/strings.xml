@@ -3,4 +3,5 @@
     <string name="sign_up_message">Please enter your details to create an account</string>
     <string name="create_account_message">Don\'t have an account? create one</string>
     <string name="account_created">Account has been created</string>
+    <string name="account_error">There was an error please try again</string>
 </resources>

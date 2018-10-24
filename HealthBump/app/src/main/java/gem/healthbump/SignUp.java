@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
@@ -28,16 +29,29 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        findViewById(R.id.signUpBtn).setOnClickListener(this);
         progressBar = findViewById(R.id.progressBarSignUp);
+
         editTextEmail = findViewById(R.id.emailS);
+        editTextUsername = findViewById(R.id.usernameS);
+        editTextPass = findViewById(R.id.passwordS);
+        editTextRePass = findViewById(R.id.repasswordS);
+
         progressBar.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
-
     }
 
+   /* @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+    }*/
+
     public void createUserAccount(){
+
         final String email = editTextEmail.getText().toString().trim();
         final String username = editTextUsername.getText().toString().trim();
         String passwordUser = editTextPass.getText().toString().trim();
@@ -97,7 +111,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUp.this, getString(R.string.account_created), Toast.LENGTH_LONG).show();
                                     }else{
-                                        //Display Error message
+                                        Toast.makeText(SignUp.this, getString(R.string.account_error), Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
