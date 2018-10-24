@@ -13,6 +13,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/sign_up_message"
         android:textAlignment="center"
+        android:textColor="@color/colorMainTextMenus"
         android:textSize="20sp" />
 
     <EditText
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="60sp"
         android:layout_gravity="center"
+        android:textColor="@color/colorMainTextMenus"
         android:ems="10"
         android:gravity="center"
         android:hint="Username"
@@ -30,6 +32,7 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
+        android:textColor="@color/colorMainTextMenus"
         android:layout_height="60sp"
         android:layout_marginTop="30sp"
         android:ems="10"
@@ -40,6 +43,8 @@
 
     <Button
         android:layout_gravity="center"
+        android:textColor="@color/colorMainTextMenus"
+        android:background="@color/colorBackground"
         android:id="@+id/button"
         android:layout_width="80sp"
         android:layout_height="60sp"
