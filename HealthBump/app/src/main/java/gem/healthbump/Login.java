@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+
+public class Login extends AppCompatActivity  implements View.OnClickListener {
 
     EditText editTextUsername, editTextPassword;
     TextView textViewSingUp;
     Button loginBtn;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +27,24 @@ public class Login extends AppCompatActivity {
         textViewSingUp = (TextView) findViewById(R.id.textViewCreateAccount);
         loginBtn = findViewById(R.id.loginBtn);
 
-        textViewSingUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mAuth = FirebaseAuth.getInstance();
+
+    }
+
+    private void userLogin(){
+        mAuth.signInWithEmailAndPassword();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case (R.id.textViewSignupMessage):
                 Intent i = new Intent(Login.this, SignUp.class);
                 Login.this.startActivity(i);
-            }
-        });
-
-        /*loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
-
+                break;
+            case (R.id.loginBtn):
+                userLogin();
+                break;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package gem.healthbump;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -110,13 +112,20 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                     progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUp.this, getString(R.string.account_created), Toast.LENGTH_LONG).show();
+                                        Intent toStartMenu = new Intent(SignUp.this, StartMenu.class);
+                                        SignUp.this.startActivity(toStartMenu);
+
                                     }else{
                                         Toast.makeText(SignUp.this, getString(R.string.account_error), Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
                         }else {
-                            Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException){
+                                Toast.makeText(getApplicationContext(), "Email already registered", Toast.LENGTH_LONG).show();
+                            }else {
+                                Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
