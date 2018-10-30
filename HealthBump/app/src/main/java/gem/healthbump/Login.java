@@ -2,12 +2,18 @@ package gem.healthbump;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity  implements View.OnClickListener {
@@ -22,11 +28,16 @@ public class Login extends AppCompatActivity  implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
 
+        //Setting views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSingUp = (TextView) findViewById(R.id.textViewCreateAccount);
-        loginBtn = findViewById(R.id.loginBtn);
 
+        //Setting onClickListener
+        textViewSingUp.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
+
+        //Getting Firabase instance
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -34,9 +45,36 @@ public class Login extends AppCompatActivity  implements View.OnClickListener {
     private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        mAuth.signInWithEmailAndPassword(email, password){
 
+        if (email.isEmpty()){
+            editTextEmail.setError("You forgot to enter your email address");
+            editTextEmail.requestFocus();
+            return;
         }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            editTextEmail.setError("Enter a valid email");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()){
+            editTextPassword.setError("Your forgot to enter your password");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Intent m = new Intent(Login.this, StartMenu.class);
+                    Login.this.startActivity(m);
+                }else{
+                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
