@@ -38,9 +38,9 @@
             android:id="@+id/loginBtn"
             android:layout_width="90sp"
             android:layout_height="60sp"
-            android:layout_marginTop="60sp"
             android:layout_gravity="center"
-            android:text="Button"
+            android:layout_marginTop="60sp"
+            android:text="Log in"
             android:textAlignment="center" />
 
         <TextView

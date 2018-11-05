@@ -19,8 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity  implements View.OnClickListener {
 
     EditText editTextEmail, editTextPassword;
-    TextView textViewSingUp;
-    Button loginBtn;
     FirebaseAuth mAuth;
 
     @Override
@@ -31,11 +29,10 @@ public class Login extends AppCompatActivity  implements View.OnClickListener {
         //Setting views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textViewSingUp = (TextView) findViewById(R.id.textViewCreateAccount);
 
         //Setting onClickListener
-        textViewSingUp.setOnClickListener(this);
-        loginBtn.setOnClickListener(this);
+        findViewById(R.id.textViewCreateAccount).setOnClickListener(this);
+        findViewById(R.id.loginBtn).setOnClickListener(this);
 
         //Getting Firabase instance
         mAuth = FirebaseAuth.getInstance();
@@ -77,12 +74,16 @@ public class Login extends AppCompatActivity  implements View.OnClickListener {
         });
     }
 
+    private void signUp(){
+        Intent i = new Intent(Login.this, SignUp.class);
+        Login.this.startActivity(i);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case (R.id.textViewSignupMessage):
-                Intent i = new Intent(Login.this, SignUp.class);
-                Login.this.startActivity(i);
+            case (R.id.textViewCreateAccount):
+                signUp();
                 break;
             case (R.id.loginBtn):
                 userLogin();
